@@ -1,0 +1,15 @@
+import praw
+
+reddit = reddit = praw.Reddit(client_id ='hoxGTomWzrfwhcwNVzHKbg' , client_secret ='Z-XkFv8W5LUlXzE_bpYSqXihj3iHlg' , username ='tangierent', password ='', user_agent ='prawltutorialv1')
+
+subreddit = reddit.subreddit('sanpedrocactusforsale')
+
+hottest_cactiposts = subreddit.hot(limit = 9) # nine of the "hottest" submissions to the subreddit
+
+for post in hottest_cactiposts:
+
+
+    if not post.sticked: #ignoring stickied threads
+        print(post)
+        print(post.title)
+        print(dir(post)) #to see attributes of object
