@@ -1,15 +1,33 @@
 import praw
+import json
 
 reddit = reddit = praw.Reddit(client_id ='hoxGTomWzrfwhcwNVzHKbg' , client_secret ='Z-XkFv8W5LUlXzE_bpYSqXihj3iHlg' , username ='tangierent', password ='', user_agent ='prawltutorialv1')
 
 subreddit = reddit.subreddit('sanpedrocactusforsale')
 
-hottest_cactiposts = subreddit.hot(limit = 9) # nine of the "hottest" submissions to the subreddit
+hottest_cactiposts = subreddit.hot(limit = 12) # a number of the "hottest" submissions to the subreddit
+
+json_path = "output2.json"
+
+data = {
+        "ID" : [],
+        "title" : []
+    }
+
 
 for post in hottest_cactiposts:
 
 
-    if not post.sticked: #ignoring stickied threads
-        print(post)
-        print(post.title)
-        print(dir(post)) #to see attributes of object
+    
+    if not post.stickied: #ignoring stickied threads
+        #print(post)
+        #print(type(post))
+        #print(vars(post))
+        #print(data)       
+        #print(dir(post)) 
+
+        data["ID"].append(post.id)
+        data["title"].append(post.title)
+
+        with open(json_path,"w") as fp:
+            json.dump(data, fp, indent = None)
